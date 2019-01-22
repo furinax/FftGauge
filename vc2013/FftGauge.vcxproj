@@ -109,12 +109,14 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup>
+    <ClCompile Include="..\src\AudioInput.cpp" />
     <ClCompile Include="..\src\Digits.cpp" />
     <ClCompile Include="..\src\FftGaugeApp.cpp" />
     <ClCompile Include="..\src\Gauge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h" />
+    <ClInclude Include="..\src\AudioInput.h" />
     <ClInclude Include="..\src\Digits.h" />
     <ClInclude Include="..\src\Gauge.h" />
   </ItemGroup>
