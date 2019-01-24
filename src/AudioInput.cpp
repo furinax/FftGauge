@@ -1,5 +1,6 @@
 #include "AudioInput.h"
 #include "cinder/Log.h"
+#include "cinder/audio/dsp/Dsp.h"
 
 using namespace ci;
 using namespace std;
@@ -44,6 +45,7 @@ void AudioInput::setup()
 void AudioInput::update()
 {
 	mMagSpectrum = mMonitorSpectralNode->getMagSpectrum();
+	ci::audio::dsp::normalize(&mMagSpectrum[0], mMagSpectrum.size(), 1.f);
 }
 
 float AudioInput::getVolume()
@@ -53,8 +55,15 @@ float AudioInput::getVolume()
 
 float AudioInput::getBinFrequency(const int binIndex)
 {
-	return mMagSpectrum[binIndex];//binIndex * (float)mCtx->getSampleRate() / (float)mMonitorSpectralNode->getFftSize();
+	return binIndex * (float)mCtx->getSampleRate() / (float)mMonitorSpectralNode->getFftSize(); //
 }
+
+float AudioInput::getBinMagnitude(const int binIndex)
+{
+	return mMagSpectrum[binIndex];
+}
+
+
 
 void AudioInput::draw()
 {

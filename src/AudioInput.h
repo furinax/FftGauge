@@ -17,6 +17,7 @@ public:
 	void draw();
 	float getVolume();
 	float getBinFrequency(const int binIndex);
+	float getBinMagnitude(const int binIndex);
 
 private:
 	ci::audio::Context*					mCtx;

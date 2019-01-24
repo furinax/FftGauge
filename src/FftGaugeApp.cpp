@@ -66,7 +66,7 @@ void FftGaugeApp::update()
 
 	//float level = (float)mMousePos.y / (float)getWindowHeight();
 	freqBinIndex = mMousePos.y * 2;
-	float level = mAudioInput.getBinFrequency(freqBinIndex);
+	float level = mAudioInput.getBinMagnitude(freqBinIndex);
 	
 	mGauge.update(level);
 	mDigits.update(100 * level);
