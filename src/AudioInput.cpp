@@ -18,11 +18,14 @@ AudioInput::~AudioInput()
 
 void AudioInput::setup()
 {
-	//Microphone (Realtek High Definition Audio)
-	//Realtek Digital Output(Realtek High Definition Audio)
-	//Realtek Digital Output(Optical) (Realtek High Definition Audio)
-	//ASUS VN248 - 4 (NVIDIA High Definition Audio)
-	//ASUS VN248 - 0 (NVIDIA High Definition Audio)
+	//| debug | AudioInput::setup[29] Microphone (2 - Plantronics GameCom 818)
+	//	| debug | AudioInput::setup[29] Microphone (Realtek High Definition Audio)
+	//	| debug | AudioInput::setup[29] ASUS VN248 - 4 (NVIDIA High Definition Audio)
+	//	| debug | AudioInput::setup[29] ASUS VN248 - 0 (NVIDIA High Definition Audio)
+	//	| debug | AudioInput::setup[29] Realtek Digital Output(Optical) (Realtek High Definition Audio)
+	//	| debug | AudioInput::setup[29] Speakers(Realtek High Definition Audio)
+	//	| debug | AudioInput::setup[29] Realtek Digital Output(Realtek High Definition Audio)
+	//	| debug | AudioInput::setup[29] Speakers(2 - Plantronics GameCom 818)
 	auto inputs = audio::Device::getDevices();
 	for (auto i : inputs)
 	{
@@ -56,17 +59,12 @@ float AudioInput::getVolume()
 
 float AudioInput::getBinFrequency(const int binIndex)
 {
-	return mMonitorSpectralNode->getFreqForBin(binIndex);//binIndex * (float)mCtx->getSampleRate() / (float)mMonitorSpectralNode->getFftSize();
+	return mMonitorSpectralNode->getFreqForBin(binIndex);
 }
 
 float AudioInput::getBinMagnitude(const int binIndex)
 {
 	return mMagSpectrum[binIndex];
-}
-
-float AudioInput::getCenter()
-{
-	return mMonitorSpectralNode->getSpectralCentroid();
 }
 
 void AudioInput::draw()
@@ -83,8 +81,6 @@ void AudioInput::draw()
 	ci::gl::color(ci::Color::white());
 	ci::gl::draw(path);
 	drawSpectralCentroid();
-
-
 }
 
 void AudioInput::drawSpectralCentroid()

@@ -69,7 +69,6 @@ void FftGaugeApp::update()
 	float level = mAudioInput.getBinMagnitude(freqBinIndex);
 	
 	mGauge.update(level);
-	mDigits.update(mAudioInput.getCenter());
 }
 
 void FftGaugeApp::draw()

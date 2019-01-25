@@ -6,6 +6,6 @@ public:
 	void draw();
 	void update(float const level);
 
-	float mLevel;
+	float mLevel = 0.f;
 	ci::ivec2 mCenter;
 };
