@@ -18,6 +18,8 @@ public:
 	float getVolume();
 	float getBinFrequency(const int binIndex);
 	float getBinMagnitude(const int binIndex);
+	float getCenter();
+	void drawSpectralCentroid();
 
 private:
 	ci::audio::Context*					mCtx;

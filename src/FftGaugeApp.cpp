@@ -69,7 +69,7 @@ void FftGaugeApp::update()
 	float level = mAudioInput.getBinMagnitude(freqBinIndex);
 	
 	mGauge.update(level);
-	mDigits.update(100 * level);
+	mDigits.update(mAudioInput.getCenter());
 }
 
 void FftGaugeApp::draw()
@@ -78,6 +78,7 @@ void FftGaugeApp::draw()
 	mGauge.draw();
 	mDigits.draw();
 	mParams->draw();
+	mAudioInput.draw();
 }
 
 CINDER_APP( FftGaugeApp, RendererGl )
