@@ -18,6 +18,7 @@ public:
 	float getVolume();
 	float getBinFrequency(const int binIndex);
 	float getBinMagnitude(const int binIndex);
+	float getCentroidFrequency();
 	void drawSpectralCentroid();
 
 private:
@@ -27,4 +28,5 @@ private:
 	ci::audio::MonitorNodeRef			mMonitor;
 	ci::audio::GainNodeRef mGain;
 	std::vector<float>					mMagSpectrum;
+	float								mCentroidFreq = 0;
 };

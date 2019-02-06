@@ -50,6 +50,9 @@ void AudioInput::update()
 {
 	mMagSpectrum = mMonitorSpectralNode->getMagSpectrum();
 	ci::audio::dsp::normalize(&mMagSpectrum[0], mMagSpectrum.size(), 1.f);
+
+	mCentroidFreq = mMonitorSpectralNode->getSpectralCentroid();
+	
 }
 
 float AudioInput::getVolume()
@@ -86,15 +89,17 @@ void AudioInput::draw()
 void AudioInput::drawSpectralCentroid()
 
 {
-
-	float spectralCentroid = mMonitorSpectralNode->getSpectralCentroid();
 	float nyquist = (float)audio::master()->getSampleRate() / 2.0f;
+	float centroidFreqNormalized = mCentroidFreq / nyquist;
 
 	Rectf bounds = ci::app::getWindowBounds();
-	float freqNormalized = spectralCentroid / nyquist;
-
-	float barCenter = bounds.x1 + freqNormalized * bounds.getWidth();
+	float barCenter = bounds.x1 + centroidFreqNormalized * bounds.getWidth();
 	Rectf verticalBar = { barCenter - 2, bounds.y1, barCenter + 2, bounds.y2 };
 	gl::ScopedColor colorScope(0.85f, 0.45f, 0, 0.4f); // transparent orange
 	gl::drawSolidRect(verticalBar);
+}
+
+float AudioInput::getCentroidFrequency()
+{
+	return mCentroidFreq;
 }
