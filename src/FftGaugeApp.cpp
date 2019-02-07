@@ -12,6 +12,13 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
+// TODO:
+// - startup mode
+// - idle detection
+// - auto-normalization window
+// - color responsiveness
+// - shutoff detection
+
 class FftGaugeApp : public App {
   public:
 	void setup() override;
@@ -28,7 +35,7 @@ private:
 	ci::params::InterfaceGlRef mParams;
 
 	ci::ivec2 mMousePos;
-	int freqBinIndex = 0;
+	float mStartupLevel = 0;
 };
 
 void FftGaugeApp::setup()
@@ -39,7 +46,7 @@ void FftGaugeApp::setup()
 	mAudioInput.setup();
 
 	mParams = ci::params::InterfaceGl::create("My Params", ci::ivec2(100, 100));
-	mParams->addParam("Frequency Index", &freqBinIndex, false);
+	//mParams->addParam("Frequency Index", &freqBinIndex, false);
 }
 
 void FftGaugeApp::mouseMove(MouseEvent event){
@@ -63,11 +70,18 @@ void FftGaugeApp::enableFileLogging()
 void FftGaugeApp::update()
 {
 	mAudioInput.update();
+	if (mStartupLevel < 1.f)
+	{
+		mGauge.update(mStartupLevel);
+		mDigits.update((int)(mStartupLevel*100.f));
+		mStartupLevel += .01f;
+	}
+	else
+	{
+		mGauge.update(mAudioInput.getVolume());
+		mDigits.update(mAudioInput.getCentroidFrequency());
+	}
 
-	freqBinIndex = mMousePos.y * 2;
-	
-	mGauge.update(mAudioInput.getVolume());
-	mDigits.update(mAudioInput.getCentroidFrequency());
 }
 
 void FftGaugeApp::draw()
