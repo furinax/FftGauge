@@ -10,11 +10,11 @@ public:
 	Digits::Digits();
 
 	void draw();
-	void update(const int input);
+	void update(const std::string input);
 private:
 	ci::Font mFont;
 	ci::Color mTextColor;
 	ci::gl::Texture2dRef mTex;
 
-	int mValue;
+	std::string mValue;
 };

@@ -14,7 +14,7 @@ void Digits::draw()
 		.size(ci::ivec2(ci::TextBox::GROW, ci::TextBox::GROW))
 		.color(mTextColor)
 		.alignment(ci::TextBox::CENTER)
-		.text(std::to_string(mValue))
+		.text(mValue)
 		.premultiplied();
 	mTex = ci::gl::Texture2d::create(textBox.render());
 
@@ -24,7 +24,7 @@ void Digits::draw()
 	ci::gl::popMatrices();
 }
 
-void Digits::update(const int value)
+void Digits::update(const std::string value)
 {
 	mValue = value;
 }

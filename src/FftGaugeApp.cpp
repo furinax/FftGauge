@@ -7,13 +7,13 @@
 #include "Gauge.h"
 #include "Digits.h"
 #include "AudioInput.h"
+#include "Data.h"
 
 using namespace ci;
 using namespace ci::app;
 using namespace std;
 
 // TODO:
-// - startup mode
 // - idle detection
 // - auto-normalization window
 // - color responsiveness
@@ -32,6 +32,7 @@ private:
 	Gauge mGauge;
 	Digits mDigits;
 	AudioInput mAudioInput;
+	Data mData;
 	ci::params::InterfaceGlRef mParams;
 
 	ci::ivec2 mMousePos;
@@ -73,13 +74,14 @@ void FftGaugeApp::update()
 	if (mStartupLevel < 1.f)
 	{
 		mGauge.update(mStartupLevel);
-		mDigits.update((int)(mStartupLevel*100.f));
+		mDigits.update(std::to_string((int)(mStartupLevel*100.f)));
 		mStartupLevel += .01f;
 	}
 	else
 	{
+		mData.update(mAudioInput.getCentroidFrequency(), mAudioInput.getVolume());
 		mGauge.update(mAudioInput.getVolume());
-		mDigits.update(mAudioInput.getCentroidFrequency());
+		mDigits.update(mData.idle() == 0 ? "--" : (mData.idle() > mAudioInput.getVolume() ? "Idle" : std::to_string(mAudioInput.getCentroidFrequency())));
 	}
 
 }
