@@ -32,7 +32,7 @@ void Data::update(const float freq, const float amplitude)
 	else if (mAmplitudes.size() < MAX_VALUES)
 		mAmplitudes.push_front(amplitude);
 
-	if (amplitude > mIdleAmplitude)
+	if (amplitude > mIdleAmplitude * IDLE_THRESHOLD)
 	{
 		mFrequencies.push_front(freq);
 		if (mFrequencies.size() > MAX_VALUES)
