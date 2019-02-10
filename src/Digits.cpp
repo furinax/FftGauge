@@ -23,6 +23,7 @@ void Digits::draw()
 		.premultiplied();
 	mTex = ci::gl::Texture2d::create(textBox.render());
 
+	ci::gl::color(mTextColor);
 	ci::gl::pushMatrices();
 	ci::gl::translate(ci::app::getWindowWidth()*.5f-128,ci::app::getWindowHeight()*.5f-64);
 	ci::gl::draw(mTex);

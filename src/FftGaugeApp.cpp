@@ -26,9 +26,10 @@ private:
 	Gauge mGauge;
 	Digits mDigits;
 	AudioInput mAudioInput;
+	bool mDisplayInput = true;
 	Data mData;
 	ci::params::InterfaceGlRef mParams;
-
+	
 	ci::ivec2 mMousePos;
 	float mStartupLevel = 0;
 };
@@ -41,7 +42,7 @@ void FftGaugeApp::setup()
 	mAudioInput.setup();
 
 	mParams = ci::params::InterfaceGl::create("My Params", ci::ivec2(100, 100));
-	//mParams->addParam("Frequency Index", &freqBinIndex, false);
+	mParams->addParam("Display Input?", &mDisplayInput, false);
 }
 
 void FftGaugeApp::mouseMove(MouseEvent event){
@@ -86,7 +87,8 @@ void FftGaugeApp::draw()
 	mGauge.draw();
 	mDigits.draw();
 	mParams->draw();
-	mAudioInput.draw();
+	if ( mDisplayInput)
+		mAudioInput.draw();
 }
 
 CINDER_APP( FftGaugeApp, RendererGl )
