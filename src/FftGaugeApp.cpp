@@ -13,12 +13,6 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-// TODO:
-// - idle detection
-// - auto-normalization window
-// - color responsiveness
-// - shutoff detection
-
 class FftGaugeApp : public App {
   public:
 	void setup() override;
@@ -74,14 +68,14 @@ void FftGaugeApp::update()
 	if (mStartupLevel < 1.f)
 	{
 		mGauge.update(mStartupLevel);
-		mDigits.update(std::to_string((int)(mStartupLevel*100.f)));
+		mDigits.update();
 		mStartupLevel += .01f;
 	}
 	else
 	{
 		mData.update(mAudioInput.getCentroidFrequency(), mAudioInput.getVolume());
 		mGauge.update(mAudioInput.getVolume());
-		mDigits.update(mData.idle() == 0 ? "--" : (mData.idle() > mAudioInput.getVolume() ? "Idle" : std::to_string(mAudioInput.getCentroidFrequency())));
+		mDigits.update();
 	}
 
 }
