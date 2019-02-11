@@ -114,13 +114,16 @@
     <ClCompile Include="..\src\Digits.cpp" />
     <ClCompile Include="..\src\FftGaugeApp.cpp" />
     <ClCompile Include="..\src\Gauge.cpp" />
+    <ClCompile Include="..\src\Particle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h" />
     <ClInclude Include="..\src\AudioInput.h" />
+    <ClInclude Include="..\src\Colors.hpp" />
     <ClInclude Include="..\src\Data.h" />
     <ClInclude Include="..\src\Digits.h" />
     <ClInclude Include="..\src\Gauge.h" />
+    <ClInclude Include="..\src\Particle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
