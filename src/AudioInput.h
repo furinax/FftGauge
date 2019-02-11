@@ -21,6 +21,8 @@ public:
 	float getCentroidFrequency();
 	void drawSpectralCentroid();
 
+	bool mVisible = true;
+
 private:
 	ci::audio::Context*					mCtx;
 	ci::audio::InputDeviceNodeRef		mInputDeviceNode;

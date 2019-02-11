@@ -72,6 +72,9 @@ float AudioInput::getBinMagnitude(const int binIndex)
 
 void AudioInput::draw()
 {
+	if (!mVisible)
+		return;
+
 	ci::Path2d path;
 	path.moveTo(ci::ivec2(0, ci::app::getWindowHeight()));
 	for (int i = 0; i < mMagSpectrum.size(); i++)

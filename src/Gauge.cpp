@@ -14,6 +14,8 @@ Gauge::Gauge()
 
 void Gauge::draw()
 {
+	if (!mVisible)
+		return;
 	std::for_each(mParticles.begin(), mParticles.end(), [](Particle &p){p.draw(); });
 }
 

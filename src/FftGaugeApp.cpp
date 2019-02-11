@@ -26,7 +26,6 @@ private:
 	Gauge mGauge;
 	Digits mDigits;
 	AudioInput mAudioInput;
-	bool mDisplayInput = true;
 	Data mData;
 	ci::params::InterfaceGlRef mParams;
 	
@@ -42,7 +41,9 @@ void FftGaugeApp::setup()
 	mAudioInput.setup();
 
 	mParams = ci::params::InterfaceGl::create("My Params", ci::ivec2(100, 100));
-	mParams->addParam("Display Input?", &mDisplayInput, false);
+	mParams->addParam("Display Input?", &mAudioInput.mVisible, false);
+	mParams->addParam("Display Clock?", &mDigits.mVisible, false);
+	mParams->addParam("Display Gauge?", &mGauge.mVisible, false);
 }
 
 void FftGaugeApp::mouseMove(MouseEvent event){
@@ -87,8 +88,7 @@ void FftGaugeApp::draw()
 	mGauge.draw();
 	mDigits.draw();
 	mParams->draw();
-	if ( mDisplayInput)
-		mAudioInput.draw();
+	mAudioInput.draw();
 }
 
 CINDER_APP( FftGaugeApp, RendererGl )

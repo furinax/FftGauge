@@ -9,6 +9,9 @@ Digits::Digits()
 
 void Digits::draw()
 {
+	if (!mVisible)
+		return;
+
 	char buffer[20];
 	struct tm * timeinfo = localtime(&mTime);
 	time(&mTime);

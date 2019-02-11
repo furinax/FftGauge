@@ -14,6 +14,8 @@ public:
 
 	void draw();
 	void update();
+
+	bool mVisible = true;
 private:
 	ci::Font mFont;
 	ci::Color mTextColor;
