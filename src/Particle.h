@@ -14,4 +14,7 @@ public:
 	ci::vec2 mVel;
 	ci::vec2 mPos0;
 	float mLevel;
+	float mAngularK;
+
+	int MAX_DISTANCE = 400;
 };

@@ -15,4 +15,5 @@ public:
 	std::list<Particle> mParticles;
 
 	int PARTICLES = 10;
+	int RADIUS_MIN = 32, RADIUS_MAX = 64;
 };

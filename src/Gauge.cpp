@@ -4,11 +4,12 @@
 #include "cinder/CinderGlm.h"
 #include "cinder/Rand.h"
 
+
 Gauge::Gauge()
 {
 	for (int i = 0; i < PARTICLES; i++)
 	{
-		mParticles.push_back(Particle(ci::randInt(32, 128), ci::randVec2()));
+		mParticles.push_back(Particle(ci::randInt(32, 64), ci::randVec2()));
 	}
 }
 

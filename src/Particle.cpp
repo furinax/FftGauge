@@ -13,16 +13,15 @@ mLevel(0),
 mPos0(mPos)
 {
 	mColor = Colors::getRandColor();
+	mAngularK = ci::randFloat(1.f, 4.f);
 }
 
 void Particle::draw()
 {
 	ci::gl::pushMatrices();
 	ci::gl::translate(ci::app::getWindowCenter());
-	ci::Shape2d shape;
-	shape.arc(mPos, mRadius, 0, 2 * M_PI);
 	ci::gl::color(mColor);
-	ci::gl::draw(shape);
+	ci::gl::drawSolidCircle(mPos, (mLevel + .5f) * mRadius);
 	ci::gl::popMatrices();
 }
 
@@ -30,7 +29,7 @@ void Particle::update(float level)
 {
 	mLevel = level;
 	
-	auto c = glm::rotate(glm::tvec2<float, glm::precision::highp >(mPos0), (float)ci::app::getElapsedSeconds());
+	auto c = glm::length(mPos) < MAX_DISTANCE ? glm::rotate(glm::tvec2<float, glm::precision::highp >(mPos0), (float)ci::app::getElapsedSeconds() * mAngularK) : ci::vec2(0,0);
 	mVel = c * mLevel - .1f*(mPos);
 	mPos += mVel;
 }
