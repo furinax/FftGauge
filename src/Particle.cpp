@@ -18,10 +18,13 @@ mPos0(mPos)
 
 void Particle::draw()
 {
+	auto radius = (mLevel + .5f) * mRadius;
 	ci::gl::pushMatrices();
 	ci::gl::translate(ci::app::getWindowCenter());
-	ci::gl::color(mColor);
-	ci::gl::drawSolidCircle(mPos, (mLevel + .5f) * mRadius);
+	ci::gl::color(ci::ColorA(mColor, mLevel));
+	ci::gl::drawSolidCircle(mPos, radius);
+	ci::gl::color(ci::Color::white());
+	ci::gl::drawSolidCircle(mPos, radius * .8f);
 	ci::gl::popMatrices();
 }
 
