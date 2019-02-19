@@ -1,6 +1,7 @@
 #include "cinder/app/App.h"
 #include <list>
 #include "Particle.h"
+#include "cinder/gl/gl.h"
 
 class Gauge
 {
@@ -13,7 +14,7 @@ public:
 	bool mVisible = true;
 	ci::ivec2 mCenter;
 	std::list<Particle> mParticles;
+	ci::Channel32f mChannel;
 
-	int PARTICLES = 10;
-	int RADIUS_MIN = 32, RADIUS_MAX = 64;
+	int PARTICLES = 100;
 };
