@@ -29,6 +29,7 @@ private:
 	Data mData;
 	ci::params::InterfaceGlRef mParams;
 	
+	gl::FboRef mFbo;
 	ci::ivec2 mMousePos;
 	float mStartupLevel = 0;
 };
@@ -36,6 +37,7 @@ private:
 void FftGaugeApp::setup()
 {
 	setWindowSize(800, 800);
+	mFbo = gl::Fbo::create(800, 800);
 	mMousePos.x = 0;
 	mMousePos.y = 0;
 	mAudioInput.setup();
@@ -84,11 +86,15 @@ void FftGaugeApp::update()
 
 void FftGaugeApp::draw()
 {
+	mFbo->bindFramebuffer();
 	gl::clear( Color( 0, 0, 0 ) ); 
 	mGauge.draw();
 	mDigits.draw();
 	mParams->draw();
 	mAudioInput.draw();
+	mFbo->unbindFramebuffer();
+
+	gl::draw(mFbo->getTexture2d(GL_COLOR_ATTACHMENT0));
 }
 
 CINDER_APP( FftGaugeApp, RendererGl )

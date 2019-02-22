@@ -17,7 +17,7 @@ Gauge::Gauge()
 		{
 			auto pos = ci::vec2(x, y);
 			if (mChannel.getValue(pos) > 0.01f)
-				mParticles.push_back(Particle(8*mChannel.getValue(pos),pos));
+				mParticles.push_back(Particle(mChannel.getValue(pos),pos));
 		}
 	}
 }

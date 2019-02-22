@@ -6,25 +6,31 @@
 #include "cinder/Rand.h"
 #include "Colors.hpp"
 
-Particle::Particle(const int radius, const ci::vec2 pos) :
-mRadius(radius),
+Particle::Particle(const float level, const ci::vec2 pos) :
+mRadius(5),
 mPos(pos),
-mLevel(0),
+mLevel(level),
 mPos0(mPos)
 {
-	mColor = Colors::getRandColor();
+	mColor = ci::ColorA(1.f, 1.f, 1.f, level);
+	auto circle = ci::geom::Circle();
+	circle.center(mPos).radius(mRadius);
+	
+	mCircle = ci::gl::VboMesh::create(circle);
 }
 
 void Particle::draw()
 {
 	auto radius = mRadius;
-	ci::gl::color(ci::ColorA(mColor, mLevel));
-	ci::gl::drawSolidCircle(mPos, radius);
+	ci::gl::color(mColor);
+	ci::gl::draw(mCircle);
+	
+	//ci::gl::drawSolidCircle(mPos, radius);
 
 }
 
 void Particle::update(float level)
 {
 	mLevel = level;
-	
+	mRadius = 5.f * mLevel + 1.f;
 }
